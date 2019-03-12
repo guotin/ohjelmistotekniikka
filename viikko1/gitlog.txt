@@ -1,0 +1,95 @@
+commit ce58d71d9f718a1dd72696aa17d9f9756b9ec7f1
+Author: guotin <eerokauhanen@outlook.com>
+Date:   Tue Mar 12 19:07:06 2019 +0200
+
+    poisto ja nimi uusiksi
+
+ tiedostoja/file2             | 0
+ tiedostoja/{file1 => file22} | 0
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+
+commit 5022d889eb1c326c5c6ce82038e49f1961fce6cd
+Author: guotin <eerokauhanen@outlook.com>
+Date:   Tue Mar 12 19:02:44 2019 +0200
+
+    tiedostoja
+
+ tiedostoja/file1 | 0
+ tiedostoja/file2 | 0
+ tiedostoja/file3 | 0
+ 3 files changed, 0 insertions(+), 0 deletions(-)
+
+commit d573349478d1cf26146e7e9dadce3b14eac755b6
+Author: guotin <eerokauhanen@outlook.com>
+Date:   Tue Mar 12 18:58:26 2019 +0200
+
+    muokkauksia
+
+ eka.txt    | 2 +-
+ kolmas.txt | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+commit 0b2c05fc64c1091bde1271bf6f344d4ee81ebb46
+Author: guotin <eerokauhanen@outlook.com>
+Date:   Tue Mar 12 18:56:51 2019 +0200
+
+    uudelleennimentä
+
+ tiedosto.txt => eka.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 395470f892e490ef48e5f96fad8f2c632acd3e09
+Author: guotin <eerokauhanen@outlook.com>
+Date:   Tue Mar 12 18:55:00 2019 +0200
+
+    toisen poisto
+
+ toinen.txt | 1 -
+ 1 file changed, 1 deletion(-)
+
+commit a0a3c0b3ca50389603be949a11d344c9f8fbc33b
+Author: guotin <eerokauhanen@outlook.com>
+Date:   Tue Mar 12 18:52:55 2019 +0200
+
+    stuff-kansio
+
+ stuff/jotain.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 4b46f3412a01e740839de3de75c63f880bb20763
+Author: guotin <eerokauhanen@outlook.com>
+Date:   Tue Mar 12 18:50:49 2019 +0200
+
+    toisen ja kolmannen muokkaus
+
+ kolmas.txt | 1 +
+ toinen.txt | 1 +
+ 2 files changed, 2 insertions(+)
+
+commit a7495f766582151617c96267e13eec7e33d52a59
+Author: guotin <eerokauhanen@outlook.com>
+Date:   Tue Mar 12 18:49:40 2019 +0200
+
+    kolmas teksti
+
+ kolmas.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit d73c5408f5567961c8881562b034af25bcca0fcc
+Author: guotin <eerokauhanen@outlook.com>
+Date:   Tue Mar 12 18:48:25 2019 +0200
+
+    muutos ja lisäys
+
+ tiedosto.txt | 1 +
+ toinen.txt   | 0
+ 2 files changed, 1 insertion(+)
+
+commit f63724e7df7e91102b8280da47fa926cb922a0b9
+Author: guotin <eerokauhanen@outlook.com>
+Date:   Tue Mar 12 18:46:56 2019 +0200
+
+    tiedosto.txt luotu
+
+ tiedosto.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
