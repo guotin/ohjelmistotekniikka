@@ -8,10 +8,6 @@ Sovelluksen tarkoituksena on tarjota käyttäjilleen toiminnallisuus ruokakuluje
 
 Sovelluksella on ainoastaan yksi käyttäjätyyppi eli normaali käyttäjä.
 
-## Käyttöliittymäluonnos
-
-tulossa...
-
 ## Perusversion tarjoama toiminnallisuus
 
 ### Ennen kirjautumista
@@ -28,3 +24,10 @@ tulossa...
 
 - käyttäjä voi kirjautua ulos järjestelmästä.
 
+## Jatkokehitysideoita
+
+Perusversion jälkeen voidaan pohtia muutamia lisäyksiä
+
+-Ruokaostoksella voisi olla jonkinlainen kategoria, esimerkiksi "juhla" tai "normaali"
+
+-Käyttäjien ruokaostosten tietoja voisi näyttää kaikille jos käyttäjät siihen suostuvat. Voisi kilpailla kuka ostaa eniten ruokaa.
