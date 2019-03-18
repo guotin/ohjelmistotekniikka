@@ -28,6 +28,6 @@ Sovelluksella on ainoastaan yksi käyttäjätyyppi eli normaali käyttäjä.
 
 Perusversion jälkeen voidaan pohtia muutamia lisäyksiä
 
--Ruokaostoksella voisi olla jonkinlainen kategoria, esimerkiksi "juhla" tai "normaali"
+- Ruokaostoksella voisi olla jonkinlainen kategoria, esimerkiksi "juhla" tai "normaali"
 
--Käyttäjien ruokaostosten tietoja voisi näyttää kaikille jos käyttäjät siihen suostuvat. Voisi kilpailla kuka ostaa eniten ruokaa.
+- Käyttäjien ruokaostosten tietoja voisi näyttää kaikille jos käyttäjät siihen suostuvat. Voisi kilpailla kuka ostaa eniten ruokaa.
