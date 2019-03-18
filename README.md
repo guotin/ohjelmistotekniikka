@@ -1,6 +1,12 @@
-<h1> Ohjelmistotekniikka, kevät 2019 </h1>
-<h2> Tehtävät </h2>
-<h3> Viikko 1 </h3>
+# Ohjelmistotekniikka, kevät 2019 
+
+## Dokumentaatio
+
+[Vaatimusmäärittely](https://github.com/guotin/ohjelmistotekniikka/blob/master/Ruokakululaskuri/dokumentaatio/vaatimusmaarittely.md)
+
+## Tehtävät
+
+### viikko 1
 
 [gitlog.txt](https://github.com/guotin/ohjelmistotekniikka/blob/master/laskarit/viikko1/gitlog.txt)
 
