@@ -2,11 +2,14 @@
 package domain;
 
 import dao.PurchaseDao;
+import domain.Purchase;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,18 +17,35 @@ import java.util.logging.Logger;
 public class PurchaseService {
     
     private Purchase purchase;
+    private PurchaseDao purchaseDao;
     
-    public PurchaseService() throws SQLException {
+    public PurchaseService(PurchaseDao purchaseDao) throws SQLException {
+        this.purchaseDao = purchaseDao;
+          
+    }
+    
+    public boolean createPurchase(String sum, LocalDate date) {
+        if (Integer.parseInt(sum) < 0) {
+            return false;
+        }
         
-        try (Connection conn = DriverManager.getConnection("jdbc:h2:./foodpurchases", "sa", "")) {
-            conn.prepareStatement("CREATE TABLE IF NOT EXISTS Purchase (\n"
-                    + "    id INTEGER PRIMARY KEY AUTO_INCREMENT,\n"
-                    + "    sum INTEGER,\n"
-                    + "    date DATE,\n"
-                    + ");").executeUpdate();
-
-        } catch (SQLException ex) {
-            Logger.getLogger(PurchaseService.class.getName()).log(Level.SEVERE, null, ex);
+        Purchase purchase = new Purchase(Integer.parseInt(sum), date);
+        
+        try {
+            purchaseDao.create(purchase); 
+        } catch(SQLException e) {
+            return false;
+        }
+         
+        return true;
+        
+    }
+    public int getMoneySpent() {
+        try {
+           int moneySpent =  purchaseDao.getSumSpent();
+           return moneySpent;
+        } catch(SQLException e) {
+            return 0;
         }
         
     }
