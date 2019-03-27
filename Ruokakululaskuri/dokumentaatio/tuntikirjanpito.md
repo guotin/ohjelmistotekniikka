@@ -2,4 +2,4 @@
 
 | päivä | aika | mitä tein  |
 | :----:|:-----| :----------|
-| 27.3. | 4    | Alustava tietokantaja siihen tietojen lisääminen javaFX:n kautta toteutettu  |
+| 27.3. | 4    | Alustava tietokanta toteutettu ja graafisen käyttöliittymän kautta onnistuu tapahtumien lisäys  |
