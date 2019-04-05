@@ -1,11 +1,9 @@
-
-package dao;
+package application.dao;
 
 import java.sql.SQLException;
-import java.util.List;
 
-public interface Dao<T, K> {
-    
+public interface UserDaoInterface<T, K> {
+
     void create(T object) throws SQLException;
-    
+
 }
