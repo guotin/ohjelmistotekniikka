@@ -8,3 +8,5 @@ Sovellus ruokakulujen kirjanpitoon käyttäjäkohtaisesti.
 
 [Tuntikirjanpito](https://github.com/guotin/ohjelmistotekniikka/blob/master/Ruokakululaskuri/dokumentaatio/tuntikirjanpito.md)
 
+[Arkkitehtuuri](https://github.com/guotin/ohjelmistotekniikka/blob/master/Ruokakululaskuri/dokumentaatio/arkkitehtuuri.md)
+
