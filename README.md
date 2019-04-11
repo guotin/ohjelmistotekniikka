@@ -1,6 +1,6 @@
-# Ohjelmistotekniikka, kevät 2019 
+# Food purchase tracker
 
-Sovellus ruokakulujen kirjanpitoon käyttäjäkohtaisesti.
+Sovellus ruokakulujen kirjanpitoon käyttäjäkohtaisesti. Sovelluksen avulla käyttäjä pystyy lisäämään paikallisesti säilytettyyn tietokantaan omia ruokaostoksiaan ja nähdä niistä halutessaan erilaisia tilastoja.
 
 ## Dokumentaatio
 
