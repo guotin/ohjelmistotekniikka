@@ -259,7 +259,7 @@ public class AppUi extends Application {
                 } else if (returnValue == 1) {
                     datePicker.setValue(null);
                     sumTextfield.setText("");
-                    addMessage.setText("Negative purchases are not allowed");
+                    addMessage.setText("Negative or zero sum purchases are not allowed");
                 } else if (returnValue == -1) {
                     datePicker.setValue(null);
                     sumTextfield.setText("");
