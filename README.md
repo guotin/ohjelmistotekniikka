@@ -10,3 +10,33 @@ Sovellus ruokakulujen kirjanpitoon k채ytt채j채kohtaisesti. Sovelluksen avulla k�
 
 [Arkkitehtuuri](https://github.com/guotin/ohjelmistotekniikka/blob/master/Ruokakululaskuri/dokumentaatio/arkkitehtuuri.md)
 
+## Komentorivitoiminnot
+
+### Testaus
+
+Testit suoritetaan komennolla
+
+`mvn test`
+
+Testikattavuusraportti luodaan komennolla
+
+
+`mvn jacoco:report`
+
+Kattavuusraporttia voi tarkastella avaamalla selaimella tiedosto _target/site/jacoco/index.html_
+
+### Suoritettavan jarin generointi
+
+Komento
+
+`mvn package`
+
+generoi hakemistoon _target_ suoritettavan jar-tiedoston _Ruokakululaskuri-1.0-SNAPSHOT_
+
+### Checkstyle
+
+Tiedostoon [checkstyle.xml](https://github.com/guotin/ohjelmistotekniikka/blob/master/Ruokakululaskuri/checkstyle.xml) m채채rittelem채t tarkistukset suoritetaan komennolla
+
+`mvn jxr:jxr checkstyle:checkstyle`
+
+Mahdolliset virheilmoitukset selvi채v채t avaamalla selaimella tiedosto _target/site/checkstyle.html_
