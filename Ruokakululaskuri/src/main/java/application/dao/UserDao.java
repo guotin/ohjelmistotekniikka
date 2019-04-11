@@ -9,14 +9,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class UserDao implements UserDaoInterface<User, Integer> {
-
-    public UserDao() {
-
+    
+    private String databaseName;
+    
+    public UserDao(String name) {
+        this.databaseName = "jdbc:h2:./" + name;
     }
 
     @Override
     public void create(User user) throws SQLException {
-        Connection connection = DriverManager.getConnection("jdbc:h2:./foodpurchases", "sa", "");
+        Connection connection = DriverManager.getConnection(databaseName, "sa", "");
         PreparedStatement statement = connection.prepareStatement("INSERT INTO User (username, password) VALUES (?,?)");
         statement.setString(1, user.getUsername());
         statement.setString(2, user.getPassword());
@@ -25,7 +27,7 @@ public class UserDao implements UserDaoInterface<User, Integer> {
 
     public boolean login(User user) throws SQLException {
 
-        Connection connection = DriverManager.getConnection("jdbc:h2:./foodpurchases", "sa", "");
+        Connection connection = DriverManager.getConnection(databaseName, "sa", "");
         PreparedStatement statement = connection.prepareStatement("SELECT username, password FROM User WHERE username = ?");
         statement.setString(1, user.getUsername());
         ResultSet resultSet = statement.executeQuery();
@@ -43,7 +45,7 @@ public class UserDao implements UserDaoInterface<User, Integer> {
     }
 
     public int getIdByUsername(String username) throws SQLException {
-        Connection connection = DriverManager.getConnection("jdbc:h2:./foodpurchases", "sa", "");
+        Connection connection = DriverManager.getConnection(databaseName, "sa", "");
         PreparedStatement statement = connection.prepareStatement("SELECT id FROM User WHERE username = ?");
         statement.setString(1, username);
         ResultSet resultSet = statement.executeQuery();
@@ -56,7 +58,7 @@ public class UserDao implements UserDaoInterface<User, Integer> {
 
     public boolean searchUsername(String username) throws SQLException {
 
-        Connection connection = DriverManager.getConnection("jdbc:h2:./foodpurchases", "sa", "");
+        Connection connection = DriverManager.getConnection(databaseName, "sa", "");
         PreparedStatement statement = connection.prepareStatement("SELECT id FROM User WHERE username = ?");
         statement.setString(1, username);
         ResultSet resultSet = statement.executeQuery();

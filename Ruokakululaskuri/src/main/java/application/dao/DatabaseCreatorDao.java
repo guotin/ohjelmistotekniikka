@@ -7,14 +7,17 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class DatabaseCreatorDao {
-
-    public DatabaseCreatorDao() {
+    
+    private String databaseName;
+    
+    public DatabaseCreatorDao(String name) {
+        this.databaseName = "jdbc:h2:./" + name;
         createUserTable();
         createPurchaseTable();
     }
 
     public void createUserTable() {
-        try (Connection conn = DriverManager.getConnection("jdbc:h2:./foodpurchases", "sa", "")) {
+        try (Connection conn = DriverManager.getConnection(databaseName, "sa", "")) {
             conn.prepareStatement("CREATE TABLE IF NOT EXISTS User (\n"
                     + "    id INTEGER PRIMARY KEY AUTO_INCREMENT,\n"
                     + "    username VARCHAR(100),\n"
@@ -27,7 +30,7 @@ public class DatabaseCreatorDao {
     }
 
     public void createPurchaseTable() {
-        try (Connection conn = DriverManager.getConnection("jdbc:h2:./foodpurchases", "sa", "")) {
+        try (Connection conn = DriverManager.getConnection(databaseName, "sa", "")) {
             conn.prepareStatement("CREATE TABLE IF NOT EXISTS Purchase (\n"
                     + "    id INTEGER PRIMARY KEY AUTO_INCREMENT,\n"
                     + "    user_id INTEGER,\n"
@@ -39,5 +42,16 @@ public class DatabaseCreatorDao {
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseCreatorDao.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public void resetTables() {
+        try (Connection conn = DriverManager.getConnection(databaseName, "sa", "")) {
+            conn.prepareStatement("DROP TABLE User;").executeUpdate();
+            conn.prepareStatement("DROP TABLE Purchase;").executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseCreatorDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        createUserTable();
+        createPurchaseTable();
     }
 }

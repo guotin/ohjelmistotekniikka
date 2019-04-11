@@ -1,13 +1,21 @@
 package application.ui;
 
+import application.dao.DatabaseCreatorDao;
+import application.dao.PurchaseDao;
+import application.dao.UserDao;
+import application.domain.Purchase;
 import application.domain.PurchaseService;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -15,6 +23,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
 import javafx.stage.Stage;
 
 public class AppUi extends Application {
@@ -27,8 +36,10 @@ public class AppUi extends Application {
 
     @Override
     public void init() throws Exception {
-
-        purchaseService = new PurchaseService();
+        PurchaseDao purchaseDao = new PurchaseDao("foodpurchases");
+        UserDao userDao = new UserDao("foodpurchases");
+        DatabaseCreatorDao databasecreatorDao = new DatabaseCreatorDao("foodpurchases");
+        purchaseService = new PurchaseService(purchaseDao, userDao, databasecreatorDao);
 
     }
 
@@ -133,14 +144,43 @@ public class AppUi extends Application {
 
         });
 
-        // main window 
+        // main window
         BorderPane mainOuterLayout = new BorderPane();
         GridPane mainInnerLayout = new GridPane();
-        mainOuterLayout.setCenter(mainInnerLayout);
-        mainInnerLayout.setAlignment(Pos.CENTER);
+        mainOuterLayout.setBottom(mainInnerLayout);
+        mainInnerLayout.setAlignment(Pos.BOTTOM_LEFT);
         mainInnerLayout.setVgap(10);
         mainInnerLayout.setHgap(10);
         mainInnerLayout.setPadding(new Insets(20, 20, 20, 20));
+
+        // x-axis of purchase graph
+        NumberAxis xAxis = new NumberAxis();
+        xAxis.setUpperBound(30);
+        xAxis.setLowerBound(0);
+        xAxis.setTickLength(1);
+        xAxis.setTickUnit(1);
+        xAxis.setAnimated(true);
+        xAxis.setAutoRanging(false);
+        xAxis.setLabel("Timeframe");
+
+        // y-axis of purchase graph
+        NumberAxis yAxis = new NumberAxis();
+        yAxis.setLabel("Money spent in euros");
+
+        // purchase graph
+        LineChart<Number, Number> lineChart = new LineChart<>(xAxis, yAxis);
+        lineChart.setTitle("Food purchases");
+        mainOuterLayout.setTop(lineChart);
+
+        Button monthButton = new Button("Purchases this month");
+        Button yearButton = new Button("Purchases this year");
+        Label sumSpentPeriod = new Label("");
+        GridPane buttonPlacement = new GridPane();
+        buttonPlacement.add(monthButton, 1, 0);
+        buttonPlacement.add(yearButton, 2, 0);
+        buttonPlacement.add(sumSpentPeriod, 3, 0);
+        buttonPlacement.setHgap(20);
+        mainOuterLayout.setCenter(buttonPlacement);
 
         Button addButton = new Button("Add");
         Button refreshButton = new Button("Refresh total money spent");
@@ -148,7 +188,7 @@ public class AppUi extends Application {
         TextField sumTextfield = new TextField();
         DatePicker datePicker = new DatePicker();
         Label addMessage = new Label("");
-        Label moneySpent = new Label("Money spent: 0");
+        Label moneySpent = new Label("Money spent: 0 euros");
 
         mainInnerLayout.add(new Label("Add a new purchase"), 0, 0);
         mainInnerLayout.add(sumTextfield, 0, 1);
@@ -156,14 +196,53 @@ public class AppUi extends Application {
         mainInnerLayout.add(datePicker, 0, 2);
         mainInnerLayout.add(new Label("Date of purchase"), 1, 2);
         mainInnerLayout.add(addButton, 0, 3);
-        mainInnerLayout.add(logoutButton, 1, 3);
-        mainInnerLayout.add(addMessage, 0, 4);
+        mainInnerLayout.add(addMessage, 1, 3);
         mainInnerLayout.add(moneySpent, 0, 5);
         mainInnerLayout.add(refreshButton, 1, 5);
+        mainInnerLayout.add(logoutButton, 2, 5);
+        mainInnerLayout.setHgrow(addMessage, Priority.ALWAYS);
 
         mainScene = new Scene(mainOuterLayout, 900, 640);
 
+        // draw data of current month purchases
+        monthButton.setOnAction((event) -> {
+            xAxis.setLabel("Days of month");
+            xAxis.setUpperBound(purchaseService.lastDayOfMonth());
+            xAxis.setLowerBound(0);
+            List<Purchase> purchaseList = purchaseService.getPurchasesOfCurrentMonth();
+            XYChart.Series purchaseData = new XYChart.Series();
+            purchaseData.setName("Purchases of current month");
+            int yHeight = 20;
+            purchaseData.getData().add(new XYChart.Data(0, 0));
+            int totalSpent = 0;
+            for (Purchase purchase : purchaseList) {
+                purchaseData.getData().add(new XYChart.Data(purchase.getDate().getDayOfMonth(), purchase.getSum() + totalSpent));
+                if (purchase.getSum() > yHeight) {
+                    yHeight = purchase.getSum();
+                }
+                totalSpent += purchase.getSum();
+            }
+            sumSpentPeriod.setText("Total money spent this month: " + totalSpent + " euros");
+            yAxis.setUpperBound(yHeight + 10);
+            lineChart.getData().clear();
+            lineChart.getData().add(purchaseData);
+        });
+
+        // draw data of current year purchases - not yet functional
+        yearButton.setOnAction((event) -> {
+            sumSpentPeriod.setText("");
+            xAxis.setUpperBound(12);
+            xAxis.setLowerBound(0);
+            xAxis.setLabel("Months of year");
+            lineChart.getData().clear();
+        });
+
+        // logout and clear ui
         logoutButton.setOnAction((event) -> {
+            sumSpentPeriod.setText("");
+            addMessage.setText("");
+            xAxis.setLabel("Timeframe");
+            lineChart.getData().clear();
             primaryStage.setScene(loginScene);
         });
 
@@ -171,32 +250,31 @@ public class AppUi extends Application {
         addButton.setOnAction((event) -> {
             LocalDate date = datePicker.getValue();
             String sum = sumTextfield.getText();
-            try {
-                Integer.parseInt(sum);
-                if (datePicker.getValue() != null) {
-                    if (purchaseService.createPurchase(sum, date)) {
-                        datePicker.setValue(null);
-                        sumTextfield.setText("");
-                        addMessage.setText("Purchase saved");
-
-                    } else {
-                        datePicker.setValue(null);
-                        sumTextfield.setText("");
-                        addMessage.setText("Purchase saving failed, check input and try again");
-                    }
-                } else {
-                    addMessage.setText("Please enter a date");
+            if (date == null || sum.equals("")) {
+                addMessage.setText("Please provide input");
+            } else {
+                int returnValue = purchaseService.createPurchase(sum, date);
+                if (returnValue == 0) {
+                    addMessage.setText("Sum is not a number");
+                } else if (returnValue == 1) {
+                    datePicker.setValue(null);
+                    sumTextfield.setText("");
+                    addMessage.setText("Negative purchases are not allowed");
+                } else if (returnValue == -1) {
+                    datePicker.setValue(null);
+                    sumTextfield.setText("");
+                    addMessage.setText("Purchase saving failed, check input and try again");
+                } else if (returnValue == 2) {
+                    datePicker.setValue(null);
+                    sumTextfield.setText("");
+                    addMessage.setText("Purchase saved");
                 }
-
-            } catch (NumberFormatException e) {
-                addMessage.setText("Sum is not a number");
             }
-
         });
 
         // Refresh total money spent
         refreshButton.setOnAction((event) -> {
-            moneySpent.setText("Money spent: " + purchaseService.getMoneySpent());
+            moneySpent.setText("Money spent: " + purchaseService.getMoneySpent() + " euros");
         });
 
         //Initial setup

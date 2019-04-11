@@ -7,6 +7,13 @@ import application.domain.Purchase;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.temporal.TemporalAdjusters;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+
+import java.util.List;
+
 
 public class PurchaseService {
 
@@ -17,24 +24,34 @@ public class PurchaseService {
     private UserDao userDao;
     private int currentUserId;
 
-    public PurchaseService() throws SQLException {
-        this.databaseCreator = new DatabaseCreatorDao();
-        this.purchaseDao = new PurchaseDao();
-        this.userDao = new UserDao();
+    public PurchaseService(PurchaseDao purchaseDao, UserDao userDao, DatabaseCreatorDao databasecreatorDao) throws SQLException {
+        this.databaseCreator = databasecreatorDao;
+        this.purchaseDao = purchaseDao;
+        this.userDao = userDao;
         this.currentUserId = -1;
     }
-
-    public boolean createPurchase(String sum, LocalDate date) {
-        if (Integer.parseInt(sum) < 0) {
-            return false;
+    
+    public int createPurchase(String sum, LocalDate date) {
+        // return values:
+        // Dao fails -> return -1
+        // Not a number -error -> return 0
+        // negative sum -> return 1
+        // success -> return 2
+        try {
+            Integer.parseInt(sum);
+        } catch (NumberFormatException e) {
+            return 0;
+        }
+        if (Integer.parseInt(sum) <= 0) {
+            return 1;
         }
         purchase = new Purchase(Integer.parseInt(sum), date);
         try {
             purchaseDao.create(purchase, currentUserId);
         } catch (SQLException e) {
-            return false;
+            return -1;
         }
-        return true;
+        return 2;
     }
 
     public int getMoneySpent() {
@@ -76,5 +93,23 @@ public class PurchaseService {
         }
         return true;
     }
+
+    public int lastDayOfMonth() {
+        return LocalDate.now().lengthOfMonth();
+    }
+
+    public List getPurchasesOfCurrentMonth() {
+        LocalDate current = LocalDate.now();
+        LocalDate firstDay = current.with(TemporalAdjusters.firstDayOfMonth());
+        LocalDate lastDay = current.with(TemporalAdjusters.lastDayOfMonth());
+        List<Purchase> purchases = new ArrayList<>();
+        try {
+            purchases = purchaseDao.getPurchasesBetweenTimeframe(firstDay, lastDay, currentUserId);
+        } catch (SQLException e) {
+        }
+        Collections.sort(purchases);
+        return purchases;
+    }
+    
 
 }

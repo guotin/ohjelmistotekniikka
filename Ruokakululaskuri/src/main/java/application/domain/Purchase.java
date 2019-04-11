@@ -3,7 +3,7 @@ package application.domain;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class Purchase {
+public class Purchase implements Comparable<Purchase> {
 
     private int sum;
     private LocalDate date;
@@ -41,6 +41,14 @@ public class Purchase {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public int compareTo(Purchase o) {
+        if (o.date.isBefore(this.date)) {
+            return 1;
+        }
+        return -1;
     }
 
 }
