@@ -10,6 +10,10 @@ Sovellus ruokakulujen kirjanpitoon käyttäjäkohtaisesti. Sovelluksen avulla k�
 
 [Arkkitehtuuri](https://github.com/guotin/ohjelmistotekniikka/blob/master/Ruokakululaskuri/dokumentaatio/arkkitehtuuri.md)
 
+## Releaset
+
+[Viikko 5](https://github.com/guotin/ohjelmistotekniikka/releases/tag/Viikko5)
+
 ## Komentorivitoiminnot
 
 ### Testaus
