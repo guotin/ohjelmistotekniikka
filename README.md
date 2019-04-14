@@ -39,7 +39,7 @@ generoi hakemistoon _target_ suoritettavan jar-tiedoston _Ruokakululaskuri-1.0-S
 
 ### Checkstyle
 
-Tiedostoon [checkstyle.xml](https://github.com/guotin/ohjelmistotekniikka/blob/master/Ruokakululaskuri/checkstyle.xml) määrittelemät tarkistukset suoritetaan komennolla
+Tiedoston [checkstyle.xml](https://github.com/guotin/ohjelmistotekniikka/blob/master/Ruokakululaskuri/checkstyle.xml) määrittelemät tarkistukset suoritetaan komennolla
 
 `mvn jxr:jxr checkstyle:checkstyle`
 
