@@ -8,4 +8,6 @@
 | 10.4. | 7    | Tutustumista JavaFX viivakaavioihin ja nykyisen kuukauden ostosten piirtäminen toteuteuttu      |
 | 11.4. | 4    | Dao ja Domain luokkien parantelua testien helpottamiseksi ja testien kirjoittamista             |
 | 12.4. | 1    | Ensimmäinen sekvenssikaavio ja release tehty                                                    |
-| yht.  | 26   |                                                                                                 |
+| 23.4. | 7    | Vuoden ostotapahtumista käyrä. Lisäksi pieniä parannuksia ja lisää testausta                    |
+| 24.4. | 5    | Dokumentaatiota kirjoitettu lisää                                                               |
+| yht.  | 38   |                                                                                                 |
