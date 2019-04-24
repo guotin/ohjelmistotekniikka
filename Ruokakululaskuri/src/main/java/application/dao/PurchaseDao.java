@@ -32,7 +32,8 @@ public class PurchaseDao implements PurchaseDaoInterface<Purchase, Integer> {
      * @return amount of money spent
      * @throws SQLException if there was an error with database connection
      */
-    public int getSumSpent(int userId) throws SQLException {
+    @Override
+    public int getSumSpent(Integer userId) throws SQLException {
         Connection connection = DriverManager.getConnection(databaseName);
         PreparedStatement statement = connection.prepareStatement("SELECT sum(sum) AS allsums FROM Purchase WHERE user_id = ?");
         statement.setInt(1, userId);
@@ -53,7 +54,8 @@ public class PurchaseDao implements PurchaseDaoInterface<Purchase, Integer> {
      * @return a list of wanted purchases
      * @throws SQLException if there was an error with database connection
      */
-    public List<Purchase> getPurchasesBetweenTimeframe(LocalDate firstDay, LocalDate lastDay, int userId) throws SQLException {
+    @Override
+    public List<Purchase> getPurchasesBetweenTimeframe(LocalDate firstDay, LocalDate lastDay, Integer userId) throws SQLException {
         List<Purchase> purchases = new ArrayList<>();
         
         Connection connection = DriverManager.getConnection(databaseName);
@@ -85,7 +87,6 @@ public class PurchaseDao implements PurchaseDaoInterface<Purchase, Integer> {
         statement.setDate(2, java.sql.Date.valueOf(purchase.getDate()));
         statement.setInt(3, currentUserId);
         statement.executeUpdate();
-    }
-    
+    }   
 
 }

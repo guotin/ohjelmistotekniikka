@@ -42,6 +42,7 @@ public class UserDao implements UserDaoInterface<User, Integer> {
      * @return whether username and password match to an entity in the database
      * @throws SQLException if there was an error with database connection
      */
+    @Override
     public boolean login(User user) throws SQLException {
 
         Connection connection = DriverManager.getConnection(databaseName);
@@ -67,6 +68,7 @@ public class UserDao implements UserDaoInterface<User, Integer> {
      * @return the id as an integer
      * @throws SQLException if there was an error with database connection
      */
+    @Override
     public int getIdByUsername(String username) throws SQLException {
         Connection connection = DriverManager.getConnection(databaseName);
         PreparedStatement statement = connection.prepareStatement("SELECT id FROM User WHERE username = ?");
@@ -84,6 +86,7 @@ public class UserDao implements UserDaoInterface<User, Integer> {
      * @return whether username exists
      * @throws SQLException if there was an error with database connection
      */
+    @Override
     public boolean searchUsername(String username) throws SQLException {
 
         Connection connection = DriverManager.getConnection(databaseName);
