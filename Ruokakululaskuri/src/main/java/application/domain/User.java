@@ -2,6 +2,9 @@ package application.domain;
 
 import java.util.Objects;
 
+/**
+ * A class that represents a user
+ */
 public class User {
 
     private String username;

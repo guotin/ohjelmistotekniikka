@@ -6,6 +6,7 @@ import application.dao.PurchaseDao;
 import application.dao.UserDao;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.Map;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -64,7 +65,50 @@ public class PurchaseServiceTest {
     public void purchaseIsCreatedIfLoggedIn() {
         purchaseService.createUser("test", "test");
         purchaseService.loginUser("test", "test");
+        assertEquals(2, purchaseService.createPurchase("50", LocalDate.now()));
+    }
+    
+    @Test
+    public void currentMonthPurchasesAreReturned() {
+        purchaseService.createUser("test", "test");
+        purchaseService.loginUser("test", "test");
+        purchaseService.createPurchase("30", LocalDate.now());
         purchaseService.createPurchase("50", LocalDate.now());
+        assertEquals(2, purchaseService.getPurchasesOfCurrentMonth().size());
+    }
+    
+    @Test
+    public void currentMonthPurchasesOnlyReturnsFromCurrentMonth() {
+        purchaseService.createUser("test", "test");
+        purchaseService.loginUser("test", "test");
+        purchaseService.createPurchase("30", LocalDate.MAX);
+        purchaseService.createPurchase("50", LocalDate.MAX);
+        assertEquals(0, purchaseService.getPurchasesOfCurrentMonth().size());
+    }
+    
+    @Test
+    public void allPurchasesAreIncludedInTotalSum() {
+        purchaseService.createUser("test", "test");
+        purchaseService.loginUser("test", "test");
+        purchaseService.createPurchase("30", LocalDate.now());
+        purchaseService.createPurchase("50", LocalDate.now());
+        purchaseService.createPurchase("60", LocalDate.now());
+        purchaseService.createPurchase("100", LocalDate.now());
+        assertEquals(240, purchaseService.getMoneySpent());
+    }
+    
+    @Test
+    public void currentYearPurchasesMapsCorrectly() {
+        purchaseService.createUser("test", "test");
+        purchaseService.loginUser("test", "test");
+        purchaseService.createPurchase("30", LocalDate.now());
+        purchaseService.createPurchase("50", LocalDate.now());
+        purchaseService.createPurchase("60", LocalDate.now());
+        purchaseService.createPurchase("100", LocalDate.now());
+        purchaseService.createPurchase("100", LocalDate.MAX);
+        Map<Integer, Integer> purchaseMapTest = purchaseService.getPurchasesOfCurrentYear();
+        int sum = purchaseMapTest.get(LocalDate.now().getMonthValue());
+        assertEquals(240, sum);
     }
  
     

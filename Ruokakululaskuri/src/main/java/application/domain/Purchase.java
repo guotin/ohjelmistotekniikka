@@ -3,6 +3,10 @@ package application.domain;
 import java.time.LocalDate;
 import java.util.Objects;
 
+/**
+ * A class that represents a single purchase
+ */
+
 public class Purchase implements Comparable<Purchase> {
 
     private int sum;
@@ -42,7 +46,14 @@ public class Purchase implements Comparable<Purchase> {
         }
         return true;
     }
-
+    
+    /**
+     * Compares two purchases together to find out which is earlier
+     * @param o is another purchase
+     * @return
+     * 1 = other purchase was made earlier ///
+     * -1 = this purchase was made earlier
+     */
     @Override
     public int compareTo(Purchase o) {
         if (o.date.isBefore(this.date)) {

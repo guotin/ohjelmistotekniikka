@@ -8,6 +8,7 @@ import application.domain.PurchaseService;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -24,8 +25,15 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+/**
+ * User interface of the application
+ */
 public class AppUi extends Application {
 
     private PurchaseService purchaseService;
@@ -49,8 +57,13 @@ public class AppUi extends Application {
         // login window
         Button loginButton = new Button("Login");
         Button registerButton = new Button("Register");
+        Label loginMessage = new Label("");
         TextField usernameField = new TextField();
         PasswordField passwordField = new PasswordField();
+        Text welcomeText1 = new Text("Welcome to food purchase tracker!");
+        Text welcomeText2 = new Text("Register and login to access the main functionality");
+        welcomeText1.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20));
+        welcomeText2.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 12));       
 
         BorderPane loginOuterLayout = new BorderPane();
         GridPane loginInnerLayout = new GridPane();
@@ -59,30 +72,43 @@ public class AppUi extends Application {
         loginInnerLayout.setVgap(10);
         loginInnerLayout.setHgap(10);
         loginInnerLayout.setPadding(new Insets(20, 20, 20, 20));
-
-        loginInnerLayout.add(new Label("Username"), 0, 0);
-        loginInnerLayout.add(usernameField, 0, 1);
-        loginInnerLayout.add(new Label("Password"), 0, 2);
-        loginInnerLayout.add(passwordField, 0, 3);
-        loginInnerLayout.add(loginButton, 0, 4);
-        loginInnerLayout.add(registerButton, 1, 4);
-
+        
+        loginInnerLayout.add(welcomeText1, 0, 0);
+        loginInnerLayout.add(welcomeText2, 0, 1);
+        loginInnerLayout.add(new Label("Username"), 0, 2);
+        loginInnerLayout.add(usernameField, 0, 3);
+        loginInnerLayout.add(new Label("Password"), 0, 4);
+        loginInnerLayout.add(passwordField, 0, 5);
+        loginInnerLayout.add(loginButton, 0, 6);
+        loginInnerLayout.add(registerButton, 1, 6);
+        loginInnerLayout.add(loginMessage, 0, 7);
+        
         loginScene = new Scene(loginOuterLayout, 900, 640);
 
         loginButton.setOnAction((event) -> {
             String username = usernameField.getText();
             String password = passwordField.getText();
-            if (purchaseService.loginUser(username, password)) {
-                usernameField.setText("");
-                passwordField.setText("");
-                primaryStage.setScene(mainScene);
+            if (username.equals("") || password.equals("")) {
+                loginMessage.setText("Please provide input");
+            } else {
+                if (purchaseService.loginUser(username, password)) {
+                    usernameField.clear();
+                    passwordField.clear();
+                    loginMessage.setText("");
+                    primaryStage.setScene(mainScene);
+                } else {
+                    usernameField.clear();
+                    passwordField.clear();
+                    loginMessage.setText("Login failed! Check input and try again");
+                }
             }
 
         });
 
         registerButton.setOnAction((event) -> {
-            usernameField.setText("");
-            passwordField.setText("");
+            usernameField.clear();
+            passwordField.clear();
+            loginMessage.setText("");
             primaryStage.setScene(registerScene);
         });
 
@@ -113,8 +139,8 @@ public class AppUi extends Application {
 
         backButton.setOnAction((event) -> {
             registerMessage.setText("");
-            createUsernameField.setText("");
-            createPasswordField.setText("");
+            createUsernameField.clear();
+            createPasswordField.clear();
             primaryStage.setScene(loginScene);
         });
 
@@ -126,20 +152,20 @@ public class AppUi extends Application {
                 if (!purchaseService.usernameExists(username)) {
                     if (purchaseService.createUser(username, password)) {
                         registerMessage.setText("New user added to database");
-                        createUsernameField.setText("");
-                        createPasswordField.setText("");
+                        createUsernameField.clear();
+                        createPasswordField.clear();
                     } else {
                         registerMessage.setText("Registration failed, try again");
-                        createUsernameField.setText("");
-                        createPasswordField.setText("");
+                        createUsernameField.clear();
+                        createPasswordField.clear();
                     }
                 } else {
                     registerMessage.setText("Username already taken");
-                    createUsernameField.setText("");
-                    createPasswordField.setText("");
+                    createUsernameField.clear();
+                    createPasswordField.clear();
                 }
             } else {
-                registerMessage.setText("Please enter values");
+                registerMessage.setText("Please provide input");
             }
 
         });
@@ -206,6 +232,7 @@ public class AppUi extends Application {
 
         // draw data of current month purchases
         monthButton.setOnAction((event) -> {
+            addMessage.setText("");
             xAxis.setLabel("Days of month");
             xAxis.setUpperBound(purchaseService.lastDayOfMonth());
             xAxis.setLowerBound(0);
@@ -228,17 +255,36 @@ public class AppUi extends Application {
             lineChart.getData().add(purchaseData);
         });
 
-        // draw data of current year purchases - not yet functional
+        // draw data of current year purchases
         yearButton.setOnAction((event) -> {
+            addMessage.setText("");
             sumSpentPeriod.setText("");
             xAxis.setUpperBound(12);
             xAxis.setLowerBound(0);
             xAxis.setLabel("Months of year");
+            Map<Integer, Integer> purchaseSums = purchaseService.getPurchasesOfCurrentYear();
+            XYChart.Series purchaseData = new XYChart.Series();
+            purchaseData.setName("Purchases of current year");
+            int yHeight = 100;
+            purchaseData.getData().add(new XYChart.Data(0, 0));
+            int totalSpent = 0;
+            for (Integer month : purchaseSums.keySet()) {
+                purchaseData.getData().add(new XYChart.Data(month, purchaseSums.get(month) + totalSpent));
+                if (purchaseSums.get(month) > yHeight) {
+                    yHeight = purchaseSums.get(month);
+                }
+                totalSpent += purchaseSums.get(month);
+            }
+            sumSpentPeriod.setText("Total money spent this year: " + totalSpent + " euros");
+            yAxis.setUpperBound(yHeight + 10);
             lineChart.getData().clear();
+            lineChart.getData().add(purchaseData);
         });
 
         // logout and clear ui
         logoutButton.setOnAction((event) -> {
+            sumTextfield.clear();
+            datePicker.setValue(null);
             sumSpentPeriod.setText("");
             addMessage.setText("");
             xAxis.setLabel("Timeframe");
@@ -258,15 +304,15 @@ public class AppUi extends Application {
                     addMessage.setText("Sum is not a number");
                 } else if (returnValue == 1) {
                     datePicker.setValue(null);
-                    sumTextfield.setText("");
+                    sumTextfield.clear();
                     addMessage.setText("Negative or zero sum purchases are not allowed");
                 } else if (returnValue == -1) {
                     datePicker.setValue(null);
-                    sumTextfield.setText("");
+                    sumTextfield.clear();
                     addMessage.setText("Purchase saving failed, check input and try again");
                 } else if (returnValue == 2) {
                     datePicker.setValue(null);
-                    sumTextfield.setText("");
+                    sumTextfield.clear();
                     addMessage.setText("Purchase saved");
                 }
             }
@@ -274,6 +320,7 @@ public class AppUi extends Application {
 
         // Refresh total money spent
         refreshButton.setOnAction((event) -> {
+            addMessage.setText("");
             moneySpent.setText("Money spent: " + purchaseService.getMoneySpent() + " euros");
         });
 
