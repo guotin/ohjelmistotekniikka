@@ -98,6 +98,21 @@ public class PurchaseServiceTest {
     }
     
     @Test
+    public void onlyUsersPurchasesAreIncludedInTotalSum() {
+        purchaseService.createUser("test", "test");
+        purchaseService.loginUser("test", "test");
+        purchaseService.createPurchase("30", LocalDate.now());
+        purchaseService.createPurchase("50", LocalDate.now());
+        purchaseService.createPurchase("60", LocalDate.now());
+        purchaseService.createPurchase("100", LocalDate.now());
+        purchaseService.createUser("user", "user");
+        purchaseService.loginUser("user", "user");
+        purchaseService.createPurchase("30", LocalDate.now());
+        assertEquals(30, purchaseService.getMoneySpent());
+        
+    }
+    
+    @Test
     public void currentYearPurchasesMapsCorrectly() {
         purchaseService.createUser("test", "test");
         purchaseService.loginUser("test", "test");
@@ -109,6 +124,34 @@ public class PurchaseServiceTest {
         Map<Integer, Integer> purchaseMapTest = purchaseService.getPurchasesOfCurrentYear();
         int sum = purchaseMapTest.get(LocalDate.now().getMonthValue());
         assertEquals(240, sum);
+    }
+    
+    @Test
+    public void getAllPurchasesReturnsEverythingFromUser() {
+        purchaseService.createUser("test", "test");
+        purchaseService.loginUser("test", "test");
+        purchaseService.createPurchase("30", LocalDate.MAX);
+        purchaseService.createPurchase("50", LocalDate.MAX);
+        purchaseService.createPurchase("70", LocalDate.MIN);
+        purchaseService.createPurchase("50", LocalDate.MIN);
+        purchaseService.createPurchase("70", LocalDate.now());
+        purchaseService.createPurchase("50", LocalDate.now());
+        assertEquals(6, purchaseService.getAllPurchases().size());
+    }
+    
+    @Test
+    public void getAllPurchasesOnlyReturnsUsersPurchases() {
+        purchaseService.createUser("test", "test");
+        purchaseService.loginUser("test", "test");
+        purchaseService.createPurchase("30", LocalDate.MAX);
+        purchaseService.createPurchase("50", LocalDate.MAX);
+        purchaseService.createPurchase("70", LocalDate.MIN);
+        purchaseService.createPurchase("50", LocalDate.MIN);
+        purchaseService.createPurchase("70", LocalDate.now());
+        purchaseService.createPurchase("50", LocalDate.now());
+        purchaseService.createUser("user", "user");
+        purchaseService.loginUser("user", "user");
+        assertEquals(0, purchaseService.getAllPurchases().size());
     }
  
     

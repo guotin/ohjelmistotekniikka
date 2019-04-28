@@ -17,4 +17,18 @@ public class UserTest {
         assertFalse(user1.equals(user2));
     }
     
+    @Test
+    public void usersDoNotMatchWithWrongPassword() {
+        User user1 = new User("Matti", "salasana");
+        User user2 = new User("Matti", "password");
+        assertFalse(user1.equals(user2));
+    }
+    
+    @Test
+    public void usersMatchWhenNameAndPasswordMatch() {
+        User user1 = new User("Matti", "salasana");
+        User user2 = new User("Matti", "salasana");
+        assertEquals(user1, user2);
+    }
+    
 }

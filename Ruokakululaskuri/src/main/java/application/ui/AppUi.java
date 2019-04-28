@@ -20,6 +20,7 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
@@ -54,7 +55,7 @@ public class AppUi extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        // login window
+        // Login window buttons and texts
         Button loginButton = new Button("Login");
         Button registerButton = new Button("Register");
         Label loginMessage = new Label("");
@@ -64,7 +65,8 @@ public class AppUi extends Application {
         Text welcomeText2 = new Text("Register and login to access the main functionality");
         welcomeText1.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20));
         welcomeText2.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 12));       
-
+        
+        // Login window placements
         BorderPane loginOuterLayout = new BorderPane();
         GridPane loginInnerLayout = new GridPane();
         loginOuterLayout.setCenter(loginInnerLayout);
@@ -83,8 +85,9 @@ public class AppUi extends Application {
         loginInnerLayout.add(registerButton, 1, 6);
         loginInnerLayout.add(loginMessage, 0, 7);
         
-        loginScene = new Scene(loginOuterLayout, 900, 640);
-
+        loginScene = new Scene(loginOuterLayout, 900, 900);
+        
+        // Login button functionality
         loginButton.setOnAction((event) -> {
             String username = usernameField.getText();
             String password = passwordField.getText();
@@ -104,7 +107,8 @@ public class AppUi extends Application {
             }
 
         });
-
+        
+        // Register button functionality in login window
         registerButton.setOnAction((event) -> {
             usernameField.clear();
             passwordField.clear();
@@ -112,7 +116,7 @@ public class AppUi extends Application {
             primaryStage.setScene(registerScene);
         });
 
-        // register window
+        // Register window layout
         BorderPane registerOuterLayout = new BorderPane();
         GridPane registerInnerLayout = new GridPane();
         registerOuterLayout.setCenter(registerInnerLayout);
@@ -120,13 +124,15 @@ public class AppUi extends Application {
         registerInnerLayout.setVgap(10);
         registerInnerLayout.setHgap(10);
         registerInnerLayout.setPadding(new Insets(20, 20, 20, 20));
-
+        
+        // Register window buttons and texts
         Button createUserButton = new Button("Create user");
         Button backButton = new Button("Back to login screen");
         Label registerMessage = new Label("");
         TextField createUsernameField = new TextField();
         PasswordField createPasswordField = new PasswordField();
-
+        
+        // Adding items to register window layouts
         registerInnerLayout.add(new Label("Username"), 0, 0);
         registerInnerLayout.add(createUsernameField, 0, 1);
         registerInnerLayout.add(new Label("Password"), 0, 2);
@@ -135,17 +141,18 @@ public class AppUi extends Application {
         registerInnerLayout.add(backButton, 1, 4);
         registerInnerLayout.add(registerMessage, 0, 5);
 
-        registerScene = new Scene(registerOuterLayout, 900, 640);
-
+        registerScene = new Scene(registerOuterLayout, 900, 900);
+        
+        // Button to go back to login screen
         backButton.setOnAction((event) -> {
             registerMessage.setText("");
             createUsernameField.clear();
             createPasswordField.clear();
             primaryStage.setScene(loginScene);
         });
-
+        
+        // Button for creating a new user
         createUserButton.setOnAction((event) -> {
-
             String username = createUsernameField.getText();
             String password = createPasswordField.getText();
             if (!username.equals("") && !password.equals("")) {
@@ -167,10 +174,9 @@ public class AppUi extends Application {
             } else {
                 registerMessage.setText("Please provide input");
             }
-
         });
 
-        // main window
+        // Main window
         BorderPane mainOuterLayout = new BorderPane();
         GridPane mainInnerLayout = new GridPane();
         mainOuterLayout.setBottom(mainInnerLayout);
@@ -179,7 +185,7 @@ public class AppUi extends Application {
         mainInnerLayout.setHgap(10);
         mainInnerLayout.setPadding(new Insets(20, 20, 20, 20));
 
-        // x-axis of purchase graph
+        // X-axis of purchase graph
         NumberAxis xAxis = new NumberAxis();
         xAxis.setUpperBound(30);
         xAxis.setLowerBound(0);
@@ -189,15 +195,16 @@ public class AppUi extends Application {
         xAxis.setAutoRanging(false);
         xAxis.setLabel("Timeframe");
 
-        // y-axis of purchase graph
+        // Y-axis of purchase graph
         NumberAxis yAxis = new NumberAxis();
         yAxis.setLabel("Money spent in euros");
 
-        // purchase graph
+        // Purchase graph
         LineChart<Number, Number> lineChart = new LineChart<>(xAxis, yAxis);
         lineChart.setTitle("Food purchases");
         mainOuterLayout.setTop(lineChart);
-
+        
+        // Buttons for graph
         Button monthButton = new Button("Purchases this month");
         Button yearButton = new Button("Purchases this year");
         Label sumSpentPeriod = new Label("");
@@ -207,7 +214,8 @@ public class AppUi extends Application {
         buttonPlacement.add(sumSpentPeriod, 3, 0);
         buttonPlacement.setHgap(20);
         mainOuterLayout.setCenter(buttonPlacement);
-
+        
+        // Buttons and labels for adding a new purchase
         Button addButton = new Button("Add");
         Button refreshButton = new Button("Refresh total money spent");
         Button logoutButton = new Button("Logout");
@@ -215,7 +223,21 @@ public class AppUi extends Application {
         DatePicker datePicker = new DatePicker();
         Label addMessage = new Label("");
         Label moneySpent = new Label("Money spent: 0 euros");
+        
+        // List of all purchases
+        ListView purchaseListView = new ListView();
+        purchaseListView.setMinWidth(300);
+        purchaseListView.setMinHeight(200);
+        purchaseListView.setMaxHeight(200);
+        purchaseListView.setMaxWidth(200);
+        Button listRefreshButton = new Button("Refresh purchase list");
+        BorderPane listPlacement = new BorderPane();
+        listPlacement.setPadding(new Insets(20, 20, 20, 20));
+        mainOuterLayout.setRight(listPlacement);
+        listPlacement.setTop(new Label("List of all purchases"));
+        listPlacement.setCenter(purchaseListView);
 
+        // Layout for adding a new purchase and other buttons
         mainInnerLayout.add(new Label("Add a new purchase"), 0, 0);
         mainInnerLayout.add(sumTextfield, 0, 1);
         mainInnerLayout.add(new Label("Purchase sum in euros"), 1, 1);
@@ -225,10 +247,11 @@ public class AppUi extends Application {
         mainInnerLayout.add(addMessage, 1, 3);
         mainInnerLayout.add(moneySpent, 0, 5);
         mainInnerLayout.add(refreshButton, 1, 5);
-        mainInnerLayout.add(logoutButton, 2, 5);
+        mainInnerLayout.add(listRefreshButton, 2, 5);
+        mainInnerLayout.add(logoutButton, 4, 5);
         mainInnerLayout.setHgrow(addMessage, Priority.ALWAYS);
-
-        mainScene = new Scene(mainOuterLayout, 900, 640);
+        
+        mainScene = new Scene(mainOuterLayout, 900, 900);
 
         // draw data of current month purchases
         monthButton.setOnAction((event) -> {
@@ -255,10 +278,11 @@ public class AppUi extends Application {
             lineChart.getData().add(purchaseData);
         });
 
-        // draw data of current year purchases
+        // Draw data of current year purchases
         yearButton.setOnAction((event) -> {
             addMessage.setText("");
             sumSpentPeriod.setText("");
+            moneySpent.setText("Money spent: 0 euros");
             xAxis.setUpperBound(12);
             xAxis.setLowerBound(0);
             xAxis.setLabel("Months of year");
@@ -281,7 +305,7 @@ public class AppUi extends Application {
             lineChart.getData().add(purchaseData);
         });
 
-        // logout and clear ui
+        // Logout and clear ui
         logoutButton.setOnAction((event) -> {
             sumTextfield.clear();
             datePicker.setValue(null);
@@ -289,6 +313,7 @@ public class AppUi extends Application {
             addMessage.setText("");
             xAxis.setLabel("Timeframe");
             lineChart.getData().clear();
+            purchaseListView.getItems().clear();
             primaryStage.setScene(loginScene);
         });
 
@@ -322,6 +347,14 @@ public class AppUi extends Application {
         refreshButton.setOnAction((event) -> {
             addMessage.setText("");
             moneySpent.setText("Money spent: " + purchaseService.getMoneySpent() + " euros");
+        });
+        
+        // Refresh purchase list
+        listRefreshButton.setOnAction((event) -> {
+            addMessage.setText("");
+            List<Purchase> allPurchases = purchaseService.getAllPurchases();
+            purchaseListView.getItems().clear();
+            purchaseListView.getItems().addAll(allPurchases);
         });
 
         //Initial setup

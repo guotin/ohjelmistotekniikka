@@ -61,5 +61,9 @@ public class Purchase implements Comparable<Purchase> {
         }
         return -1;
     }
+    @Override
+    public String toString() {
+        return "Purchase date: " + this.date + " - Purchase sum: " + this.sum;
+    }
 
 }

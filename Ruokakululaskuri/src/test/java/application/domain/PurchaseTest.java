@@ -35,4 +35,10 @@ public class PurchaseTest {
         Purchase purchase2 = new Purchase(20, LocalDate.now());
         assertFalse(purchase1.equals(purchase2));
     }
+    
+    @Test
+    public void printOfPurchaseWorks() {
+        Purchase purchaseMaxDate = new Purchase(600, LocalDate.MAX);
+        assertEquals("Purchase date: +999999999-12-31 - Purchase sum: 600", purchaseMaxDate.toString());
+    }
 }

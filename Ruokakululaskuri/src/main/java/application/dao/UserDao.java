@@ -11,7 +11,7 @@ import java.sql.SQLException;
 /**
  * A class that handles the database actions related to users
  */
-public class UserDao implements UserDaoInterface<User, Integer> {
+public class UserDao implements UserDaoInterface<User> {
     
     private String databaseName;
     
@@ -26,7 +26,7 @@ public class UserDao implements UserDaoInterface<User, Integer> {
     /**
      * Stores a new user to the database
      * @param user is the user to be stored
-     * @throws SQLException if there was an error with database connection
+     * @throws SQLException if there was an error with the database connection
      */
     @Override
     public void create(User user) throws SQLException {
@@ -40,7 +40,7 @@ public class UserDao implements UserDaoInterface<User, Integer> {
      * returns whether a specified combination username and password (defined as a user) exists in the database
      * @param user is the user
      * @return whether username and password match to an entity in the database
-     * @throws SQLException if there was an error with database connection
+     * @throws SQLException if there was an error with the database connection
      */
     @Override
     public boolean login(User user) throws SQLException {
@@ -66,7 +66,7 @@ public class UserDao implements UserDaoInterface<User, Integer> {
      * Gets the unique id related to a specified username
      * @param username is the username
      * @return the id as an integer
-     * @throws SQLException if there was an error with database connection
+     * @throws SQLException if there was an error with the database connection
      */
     @Override
     public int getIdByUsername(String username) throws SQLException {
@@ -84,7 +84,7 @@ public class UserDao implements UserDaoInterface<User, Integer> {
      * Searches a given username from the database
      * @param username is the username
      * @return whether username exists
-     * @throws SQLException if there was an error with database connection
+     * @throws SQLException if there was an error with the database connection
      */
     @Override
     public boolean searchUsername(String username) throws SQLException {
