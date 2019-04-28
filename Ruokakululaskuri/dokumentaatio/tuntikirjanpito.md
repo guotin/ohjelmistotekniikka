@@ -10,4 +10,5 @@
 | 12.4. | 1    | Ensimmäinen sekvenssikaavio ja release tehty                                                    |
 | 23.4. | 7    | Vuoden ostotapahtumista käyrä. Lisäksi pieniä parannuksia ja lisää testausta                    |
 | 24.4. | 5    | Dokumentaatiota kirjoitettu lisää                                                               |
-| yht.  | 38   |                                                                                                 |
+| 28.4. | 4    | Kaikkien ostotapahtumien tarkastelu, testejä ja parannuksia                                     |
+| yht.  | 42   |                                                                                                 |
