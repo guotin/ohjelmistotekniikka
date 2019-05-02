@@ -59,7 +59,7 @@ public class PurchaseDao implements PurchaseDaoInterface<Purchase, Integer> {
         List<Purchase> purchases = new ArrayList<>();
         
         Connection connection = DriverManager.getConnection(databaseName);
-        PreparedStatement statement = connection.prepareStatement("SELECT sum, date FROM Purchase WHERE date > ? AND date < ? AND user_id = ?");
+        PreparedStatement statement = connection.prepareStatement("SELECT sum, date FROM Purchase WHERE date >= ? AND date <= ? AND user_id = ?");
         statement.setDate(1, java.sql.Date.valueOf(firstDay));
         statement.setDate(2, java.sql.Date.valueOf(lastDay));
         statement.setInt(3, userId);
