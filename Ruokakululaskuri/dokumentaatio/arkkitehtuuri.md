@@ -88,7 +88,7 @@ Kun tietokantaan on lisätty ostotapahtumia, niitä voidaan tarkastella JavaFX:l
 
 ### Vuoden ostosten tarkastelu
 
-Vuoden ostosten tarkastelu eroaa sovelluslogiikaltaan ainoastaan sillä, että `PurchaseService` -luokan metodi `getPurchasesOfCurrentYear` palauttaa `Map` -tietorakenteessa ostokset. Tässä avaimena toimii kuukausi ja arvona kuukauden aikana käytetty rahasumma. `Purchases this year` -painikkeella sovellus etenee siis tällä tavalla:
+Vuoden ostosten tarkastelu eroaa sovelluslogiikaltaan kuukauden ostosten tarkastelusta ainoastaan sillä, että `PurchaseService` -luokan metodi `getPurchasesOfCurrentYear` palauttaa `Map` -tietorakenteessa ostokset. Tässä avaimena toimii kuukausi ja arvona kuukauden aikana käytetty rahasumma. `Purchases this year` -painikkeella sovellus etenee siis tällä tavalla:
 
 <img src="https://github.com/guotin/ohjelmistotekniikka/blob/master/Ruokakululaskuri/dokumentaatio/kuvat/sekvenssi_vuosi.png">
 
@@ -117,3 +117,5 @@ Kysely saa taas parametrikseen nykyistä käyttäjää kuvaavan avaimen tietokan
 #### Uloskirjautuminen
 
 Uloskirjautuessa kaikki päänäkymän kentät tyhjennetään ja näkymä siirtyy takaisin kirjautumisnäkymään.
+
+## Sovellukseen jääneet heikkoudet
