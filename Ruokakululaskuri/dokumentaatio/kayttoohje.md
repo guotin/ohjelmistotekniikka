@@ -9,13 +9,13 @@ Ohjelma käynnistetään komennolla `mvn compile exec:java -Dexec.mainClass=appl
 ## Kirjautuminen ja rekisteröityminen
 
 Sovellus aukeaa kirjautumisnäkymään, jossa käyttäjä toivotetaan tervetulleeksi ja pyydetään kirjautumaan sisään
-<img src="https://github.com/guotin/ohjelmistotekniikka/blob/master/Ruokakululaskuri/dokumentaatio/kirjautuminen.PNG" width="900">
+<img src="https://github.com/guotin/ohjelmistotekniikka/blob/master/Ruokakululaskuri/dokumentaatio/kuvat/kirjautuminen.PNG">
 
 Pystyäkseen kirjautumaan sisään ja käyttämään sovelluksen toiminnallisuuksia, täytyy käyttäjän luoda tunnukset.
 Tämä tapahtuu siirtymällä kirjautumisnäkymästä rekisteröitymisnäkymään `Register` -painikkeella.
 Rekisteröitymisnäkymään siirtyessä käyttäjälle esitetään seuraavanlainen ruutu:
 
-<img src="https://github.com/guotin/ohjelmistotekniikka/blob/master/Ruokakululaskuri/dokumentaatio/kayttajan_luominen.PNG" width="900">
+<img src="https://github.com/guotin/ohjelmistotekniikka/blob/master/Ruokakululaskuri/dokumentaatio/kuvat/kayttajan_luominen.PNG">
 
 Rekisteröitymisnäkymässä syötetään haluamat tunnukset ja luodaan käyttä `Create user` -painikkeella.
 Tämän jälkeen voidaan siirtyä takaisin kirjautumisnäkymään `Back to login screen` -painikkeella.
@@ -28,7 +28,7 @@ Päänäkymässä on mahdollisuus lisätä ostotapahtumia ja nähdä niistä til
 #### Uuden ostotapahtuman lisääminen
 
 Uusi ostotapahtuma lisätään päänäkymässä syöttämällä ostokseen käytetty summa ja ostotapahtuman päivämäärä ja painamalla `Add` -painiketta
-<img src="https://github.com/guotin/ohjelmistotekniikka/blob/master/Ruokakululaskuri/dokumentaatio/oston_lisays.PNG" width="900">
+<img src="https://github.com/guotin/ohjelmistotekniikka/blob/master/Ruokakululaskuri/dokumentaatio/kuvat/oston_lisays.PNG">
 
 #### Kuukauden ostosten tarkastelu
 
@@ -38,14 +38,20 @@ Kuvaajan alle ilmestyy myös tarkka summa kuukauden ostoksista.
 `Refresh total money spent` -painikkeella voidaan tarkastaa kokonaissumma, jolla käyttäjä on ostoksia tehnyt.
 Tämä huomioi kaikki ajankohdat.
 
-<img src="https://github.com/guotin/ohjelmistotekniikka/blob/master/Ruokakululaskuri/dokumentaatio/kuukauden_ostot.PNG" width="900">
+<img src="https://github.com/guotin/ohjelmistotekniikka/blob/master/Ruokakululaskuri/dokumentaatio/kuvat/kuukauden_ostot.PNG">
 
 #### Vuoden ostosten tarkastelu
 
 `Purchases this year` -painike piirtää nykyisen vuoden ruokaostostilastot ruudulle. X-akselilla on kuvattuna kuukaudet ja Y-akselilla rahasumma.
 Ohjelma huomioi vain jokaisen kuukauden loppusaldon ja piirtää niistä sopivan viivakaavion.
 
-<img src="https://github.com/guotin/ohjelmistotekniikka/blob/master/Ruokakululaskuri/dokumentaatio/vuoden_ostot.PNG" width="900">
+<img src="https://github.com/guotin/ohjelmistotekniikka/blob/master/Ruokakululaskuri/dokumentaatio/kuvat/vuoden_ostot.PNG">
+
+#### Kaikki ostokset listana
+
+Käyttäjä voi halutessaan nähdä kaikki ostotapahtumat listana. Ostotapahtumat tulostuvat pieneen selattavaan laatikkoon painamalla `Refresh purchase list` -painiketta näkymän oikeassa alanurkassa.
+
+<img src="https://github.com/guotin/ohjelmistotekniikka/blob/master/Ruokakululaskuri/dokumentaatio/kuvat/ostokset_lista.PNG">
 
 #### Ohjelmasta poistuminen
 
