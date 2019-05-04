@@ -12,7 +12,7 @@ Sovellus on pakkausrakenteeltaan kolmitasoinen.
 
 ## Käyttöliittymä
 
-Sovelluksessa on kolme päänäkymää
+Sovelluksessa on kolme näkymää
 
 * Kirjautumisnäkymä
 * Rekisteröitymisnäkymä
@@ -119,3 +119,5 @@ Kysely saa taas parametrikseen nykyistä käyttäjää kuvaavan avaimen tietokan
 Uloskirjautuessa kaikki päänäkymän kentät tyhjennetään ja näkymä siirtyy takaisin kirjautumisnäkymään.
 
 ## Sovellukseen jääneet heikkoudet
+
+Sovelluksen käyttöliittymä on kirjoitettu kokonaisuudessaan `AppUi` -luokan metodiin `start`. Tämä tekee käyttöliittymän jatkokehityksen varmasti hankalaksi. `UserDao` -luokassa on myös ehkä hieman liikaa sovelluslogiikkaa, jota olisi voinut käsitellä jossain muualla.
