@@ -12,4 +12,5 @@
 | 24.4. | 5    | Dokumentaatiota kirjoitettu lisää                                                               |
 | 28.4. | 4    | Kaikkien ostotapahtumien tarkastelu, testejä ja parannuksia                                     |
 | 2.5.  | 3    | Dokumentaation parannuksia ja javadoc pakkauksille                                              |
-| yht.  | 45   |                                                                                                 |
+| 4.5.  | 2    | Dokumentaation viilaus ja loppupalautus                                                         |
+| yht.  | 47   |                                                                                                 |
