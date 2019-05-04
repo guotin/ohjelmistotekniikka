@@ -20,6 +20,8 @@ Sovellus ruokakulujen kirjanpitoon käyttäjäkohtaisesti. Sovelluksen avulla k�
 
 [Viikko 6](https://github.com/guotin/ohjelmistotekniikka/releases/tag/viikko6)
 
+[Loppupalautus](https://github.com/guotin/ohjelmistotekniikka/releases/tag/loppupalautus)
+
 ## Komentorivitoiminnot
 
 ### Testaus
