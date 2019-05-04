@@ -32,7 +32,7 @@ Testaamatta jäi muutamia metodeita, jotka palauttivat vain jonkun tietyn arvon.
 
 Sovellusta testattiin käyttöohjeiden mukaisesti Linux-ympäristössä. Myös Windows-ympäristössä ohjelman päätoiminnallisuudet saatiin testattua, vaikka sovelluksen käynnistäminen erosikin hieman ohjeista. Määrittelydokumentin kaikki toiminnallisuudet saatiin käytyä läpi eikä suurempia epäkohtia noussut esiin.
 
-## Sovellukseen jääneet heikkoudet
+## Sovellukseen jääneet laatuongelmat
 
 Järjestelmätestauksesta ilmeni, että esimerkiksi kirjautumisnäkymän virheilmoitukset voisivat olla kuvaavampia. 
 
