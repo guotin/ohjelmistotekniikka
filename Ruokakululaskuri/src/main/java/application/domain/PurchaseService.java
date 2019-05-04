@@ -26,7 +26,14 @@ public class PurchaseService {
     private User user;
     private UserDao userDao;
     private int currentUserId;
-
+    
+    /**
+     * Constructor for PurchaseService. Sets current user id to -1 before login.
+     * @param purchaseDao handles the data access for purchases
+     * @param userDao handles the data access for users
+     * @param databasecreatorDao creates a specified database
+     * @throws SQLException if there was an error with database connectivity
+     */
     public PurchaseService(PurchaseDao purchaseDao, UserDao userDao, DatabaseCreatorDao databasecreatorDao) throws SQLException {
         this.databaseCreator = databasecreatorDao;
         this.purchaseDao = purchaseDao;
