@@ -4,6 +4,17 @@
 
 Sovelluksen tarkoituksena on tarjota käyttäjilleen toiminnallisuus ruokakulujen seuraamiselle. Sovellukseen on mahdollisuus luoda useita tunnuksia ja kaikilla tunnuksilla on omat tietonsa.
 
+## Sovelluksen käyttöliittymä
+
+Sovelluksessa on kolme eri näkymää.
+
+* Kirjautumisnäkymä
+
+* Rekisteröitymisnäky
+
+* Päänäkymä
+
+
 ## Käyttäjät
 
 Sovelluksella on ainoastaan yksi käyttäjätyyppi eli normaali käyttäjä.
@@ -12,22 +23,26 @@ Sovelluksella on ainoastaan yksi käyttäjätyyppi eli normaali käyttäjä.
 
 ### Ennen kirjautumista
 
-- käyttäjä voi luoda järjestelmään käyttäjätunnuksen
+* käyttäjä voi luoda järjestelmään käyttäjätunnuksen
 
-- käyttäjä voi kirjautua järjestelmään luomillaan tunnuksilla
+* käyttäjä voi kirjautua järjestelmään luomillaan tunnuksilla
 
 ### Kirjautumisen jälkeen
 
-- käyttäjä voi tarkastella ruokakulujaan muutaman eri napin kanssa. Napit ohjaavat miltä ajanjaksolta tietoa näytetään.
+* Käyttäjä voi syöttää uuden ruokaostoksen tietokantaan. Tähän vaaditaan rahasumma ja päivämäärä.
 
-- käyttäjä voi syöttää uuden ruokaostoksen. Tähän vaaditaan rahasumma ja päivämäärä.
+* Käyttäjä voi tarkastella ruokakulujaan neljän eri napin avulla.
+  * Kaikkien ostosten yhteissumma numerona
+  * Nykyisen kuukauden ostokset viivakaaviona
+  * Nykyisen vuoden ostokset viivakaaviona
+  * Kaikki ostokset listattuna päivämääräjärjestyksessä
 
-- käyttäjä voi kirjautua ulos järjestelmästä.
+* Käyttäjä voi kirjautua ulos järjestelmästä.
 
 ## Jatkokehitysideoita
 
 Perusversion jälkeen voidaan pohtia muutamia lisäyksiä
 
-- Ruokaostoksella voisi olla jonkinlainen kategoria, esimerkiksi "juhla" tai "normaali"
+* Ruokaostos voisi sisältää jotain muuta tietoa kuin pelkästään ajankohdan ja rahamäärän.
 
-- Käyttäjien ruokaostosten tietoja voisi näyttää kaikille jos käyttäjät siihen suostuvat. Voisi kilpailla kuka ostaa eniten ruokaa.
+* Käyttäjistä voisi tehdä ryhmiä joiden ruokaostoksia voisi yhdistää
