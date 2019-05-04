@@ -1,10 +1,10 @@
 # Käyttöohje
 
-Kloonaa tämä repositorio tai lataa tiedosto ...
+Lataa tiedosto [Ruokakululaskuri.jar](https://github.com/guotin/ohjelmistotekniikka/releases/tag/loppupalautus)
 
 ## Ohjelman käynnistäminen
 
-Ohjelma käynnistetään komennolla `mvn compile exec:java -Dexec.mainClass=application.ui.AppUi`, kun ladatussa repositoriossa on navigoitu Ruokakululaskurin juurikansioon
+Ohjelma käynnistetään komennolla `java -jar Ruokakululaskuri.jar`
 
 ## Kirjautuminen ja rekisteröityminen
 
