@@ -1,20 +1,20 @@
 # Testausdokumentti
 
-Ruokakululaskuria on testattu JUnit-testeillä ja käymällä läpi sovelluksen käyttötapauksia manuaalisesti käyttöliittymän kautta. JUnit-testeissä otettiin huomioon vain sovelluslogiikasta ja pysyväistalletuksesta vastaavat luokat pakkauksissa application.domain ja application.dao.
+Ruokakululaskuria on testattu JUnit-testeillä ja käymällä läpi sovelluksen käyttötapauksia manuaalisesti käyttöliittymän kautta. JUnit-testeissä otettiin huomioon vain sovelluslogiikasta ja pysyväistalletuksesta vastaavat luokat pakkauksissa `application.domain` ja `application.dao`.
 
 ## JUnit-testaus
 
 Sovelluksen JUnit-testaus onnistui kolmen testiluokan avulla:
 
-* PurchaseTest
+* `PurchaseTest`
 
-* UserTest
+* `UserTest`
 
-* PurchaseServiceTest
+* `PurchaseServiceTest`
 
-PurchaseTest ja UserTest testasivat lähinnä olioiden samankaltaisuuksia. Tästä oli hyötyä esimerkiksi ostosten järjestämisessä ja käyttäjän sisäänkirjaantumisen validoinnissa.
+`PurchaseTest` ja `UserTest` testasivat lähinnä olioiden samankaltaisuuksia. Tästä oli hyötyä esimerkiksi ostosten järjestämisessä ja käyttäjän sisäänkirjaantumisen validoinnissa.
 
-PurchaseServiceTest huolehti pääasiallisen sovelluslogiikan ja tietokantatalletusten testaamisesta. PurhchaseServiceTest loi erillisen testitietokannan ja testasi erilaisia tietokantatapahtumia valeluokkien avulla.
+`PurchaseServiceTest` huolehti pääasiallisen sovelluslogiikan ja tietokantatalletusten testaamisesta. `PurchaseServiceTest` loi erillisen testitietokannan ja testasi erilaisia tietokantatapahtumia valeluokkien avulla.
 
 ### Testikattavuus
 
@@ -24,7 +24,9 @@ JUnit-testeillä saavutettu testikattavuus sovelluslogiikan osalta:
 
 * Haarakattavuus 75 %
 
-Testaamatta jäi muutamia metodeita, jotka palauttivat vain jonkun tietyn arvon. Esimerkiksi metodi lastDayOfMonth jäi testikattavuuden ulkopuolelle.
+<img src="https://github.com/guotin/ohjelmistotekniikka/blob/master/Ruokakululaskuri/dokumentaatio/kuvat/testikattavuus.PNG">
+
+Testaamatta jäi muutamia metodeita, jotka palauttivat vain jonkun tietyn arvon. Esimerkiksi metodi `lastDayOfMonth` jäi testikattavuuden ulkopuolelle tästä syystä.
 
 ## Järjestelmätestaus
 
