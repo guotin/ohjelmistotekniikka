@@ -31,11 +31,15 @@ public class PurchaseServiceTest {
     
     @Test
     public void purchaseIsNotCreatedWithBadInput() {
+        purchaseService.createUser("test", "test");
+        purchaseService.loginUser("test", "test");
         assertEquals(0, purchaseService.createPurchase("test", LocalDate.now()));
     }
     
     @Test
     public void purchaseIsNotCreatedWithNegativeSum() {
+        purchaseService.createUser("test", "test");
+        purchaseService.loginUser("test", "test");
         assertEquals(1, purchaseService.createPurchase("-10", LocalDate.now()));
     }
     
@@ -62,7 +66,7 @@ public class PurchaseServiceTest {
     }
     
     @Test
-    public void purchaseIsCreatedIfLoggedIn() {
+    public void purchaseIsCreatedIfLoggedInAndGoodInput() {
         purchaseService.createUser("test", "test");
         purchaseService.loginUser("test", "test");
         assertEquals(2, purchaseService.createPurchase("50", LocalDate.now()));

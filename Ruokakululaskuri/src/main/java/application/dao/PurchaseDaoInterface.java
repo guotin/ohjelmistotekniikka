@@ -12,7 +12,7 @@ import java.util.List;
 public interface PurchaseDaoInterface<T, K> {
     
     /**
-     * Creates a new purchase to database/file
+     * Creates a new purchase to database
      * @param object is the purchase
      * @param key is the user's id
      * @throws SQLException if the was an error with the connection to database

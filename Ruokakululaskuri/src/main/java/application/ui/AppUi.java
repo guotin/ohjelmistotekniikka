@@ -310,6 +310,7 @@ public class AppUi extends Application {
             sumTextfield.clear();
             datePicker.setValue(null);
             sumSpentPeriod.setText("");
+            moneySpent.setText("Money spent: 0 euros");
             addMessage.setText("");
             xAxis.setLabel("Timeframe");
             lineChart.getData().clear();

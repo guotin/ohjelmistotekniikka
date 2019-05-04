@@ -46,6 +46,14 @@ public class Purchase implements Comparable<Purchase> {
         }
         return true;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 41 * hash + this.sum;
+        hash = 41 * hash + Objects.hashCode(this.date);
+        return hash;
+    }
     
     /**
      * Compares two purchases together to find out which is earlier
