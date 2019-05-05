@@ -42,7 +42,11 @@ public class AppUi extends Application {
     private Scene loginScene;
     private Scene registerScene;
     private Scene mainScene;
-
+    
+    /**
+     * Initializes the PurchaseService object to handle logic and database connectivity. Database name is set to 'foodpurchases'.
+     * @throws Exception in case of errors
+     */
     @Override
     public void init() throws Exception {
         PurchaseDao purchaseDao = new PurchaseDao("foodpurchases");
@@ -51,7 +55,12 @@ public class AppUi extends Application {
         purchaseService = new PurchaseService(purchaseDao, userDao, databasecreatorDao);
 
     }
-
+    
+    /**
+     * Holds the Entire GUI. Comments provided for future improvements.
+     * @param primaryStage is the stage object required for JavaFX
+     * @throws Exception in case of errors
+     */
     @Override
     public void start(Stage primaryStage) throws Exception {
 
@@ -363,7 +372,7 @@ public class AppUi extends Application {
         primaryStage.setTitle("Food purchase tracker");
         primaryStage.show();
     }
-
+    
     public static void main(String[] args) {
         Application.launch(args);
     }
