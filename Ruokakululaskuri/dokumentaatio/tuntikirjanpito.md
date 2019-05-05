@@ -13,4 +13,5 @@
 | 28.4. | 4    | Kaikkien ostotapahtumien tarkastelu, testejä ja parannuksia                                     |
 | 2.5.  | 3    | Dokumentaation parannuksia ja javadoc pakkauksille                                              |
 | 4.5.  | 2    | Dokumentaation viilaus ja loppupalautus                                                         |
-| yht.  | 47   |                                                                                                 |
+| 5.5.  | 0.1  | Puuttuva Javadoc huomattu ja virhe korjattu. Lisäksi loppupalautus muokattu tämän takia.        |
+| yht.  | 47.1   |                                                                                                 |
